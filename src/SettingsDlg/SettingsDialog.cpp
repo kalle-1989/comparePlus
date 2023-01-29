@@ -119,6 +119,7 @@ INT_PTR CALLBACK SettingsDialog::run_dlgProc(UINT Message, WPARAM wParam, LPARAM
 					settings.WrapAround				= (bool) DEFAULT_WRAP_AROUND;
 					settings.GotoFirstDiff			= (bool) DEFAULT_GOTO_FIRST_DIFF;
 					settings.PromptToCloseOnMatch	= (bool) DEFAULT_PROMPT_CLOSE_ON_MATCH;
+					settings.ForceToCloseOnMatch	= (bool) DEFAULT_FORCE_CLOSE_ON_MATCH;
 
 					if (isDarkMode())
 					{
@@ -261,6 +262,8 @@ void SettingsDialog::SetParams(UserSettings* settings)
 			settings->NeverMarkIgnored ? BST_CHECKED : BST_UNCHECKED);
 	Button_SetCheck(::GetDlgItem(_hSelf, IDC_PROMPT_CLOSE_ON_MATCH),
 			settings->PromptToCloseOnMatch ? BST_CHECKED : BST_UNCHECKED);
+	Button_SetCheck(::GetDlgItem(_hSelf, IDC_FORCE_CLOSE_ON_MATCH),
+		settings->ForceToCloseOnMatch ? BST_CHECKED : BST_UNCHECKED);
 	Button_SetCheck(::GetDlgItem(_hSelf, IDC_WRAP_AROUND),
 			settings->WrapAround ? BST_CHECKED : BST_UNCHECKED);
 	Button_SetCheck(::GetDlgItem(_hSelf, IDC_GOTO_FIRST_DIFF),
@@ -337,6 +340,7 @@ void SettingsDialog::GetParams()
 	_Settings->AlignAllMatches		= (Button_GetCheck(::GetDlgItem(_hSelf, IDC_ALIGN_ALL_MATCHES)) == BST_CHECKED);
 	_Settings->NeverMarkIgnored		= (Button_GetCheck(::GetDlgItem(_hSelf, IDC_NEVER_MARK_IGNORED)) == BST_CHECKED);
 	_Settings->PromptToCloseOnMatch	= (Button_GetCheck(::GetDlgItem(_hSelf, IDC_PROMPT_CLOSE_ON_MATCH)) == BST_CHECKED);
+	_Settings->ForceToCloseOnMatch  = (Button_GetCheck(::GetDlgItem(_hSelf, IDC_FORCE_CLOSE_ON_MATCH)) == BST_CHECKED);
 	_Settings->WrapAround			= (Button_GetCheck(::GetDlgItem(_hSelf, IDC_WRAP_AROUND)) == BST_CHECKED);
 	_Settings->GotoFirstDiff		= (Button_GetCheck(::GetDlgItem(_hSelf, IDC_GOTO_FIRST_DIFF)) == BST_CHECKED);
 	_Settings->FollowingCaret		= (Button_GetCheck(::GetDlgItem(_hSelf, IDC_FOLLOWING_CARET)) == BST_CHECKED);

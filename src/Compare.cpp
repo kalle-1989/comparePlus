@@ -2864,23 +2864,25 @@ void compare(bool selectionCompare = false, bool findUniqueMode = false, bool au
 			}
 			else
 			{
-				_sntprintf_s(msg, _countof(msg), _TRUNCATE,
+				if (Settings.ForceToCloseOnMatch == false) {
+					_sntprintf_s(msg, _countof(msg), _TRUNCATE,
 						TEXT("%s \"%s\" and \"%s\" %s.%s"),
 						selectionCompare ? TEXT("Selections in files") : TEXT("Files"),
 						newName, ::PathFindFileName(oldFile.name),
 						cmpPair->options.findUniqueMode ? TEXT("do not contain unique lines") : TEXT("match"),
 						Settings.PromptToCloseOnMatch ? TEXT("\n\nClose compared files?") : TEXT(""));
 
-				if (Settings.PromptToCloseOnMatch)
-					choice = ::MessageBox(nppData._nppHandle, msg,
+					if (Settings.PromptToCloseOnMatch)
+						choice = ::MessageBox(nppData._nppHandle, msg,
 							cmpPair->options.findUniqueMode ? TEXT("Find Unique") : TEXT("Compare"),
 							MB_YESNO | MB_ICONQUESTION | MB_DEFBUTTON1);
-				else
-					::MessageBox(nppData._nppHandle, msg,
+					else
+						::MessageBox(nppData._nppHandle, msg,
 							cmpPair->options.findUniqueMode ? TEXT("Find Unique") : TEXT("Compare"), MB_OK);
+				}
 			}
 
-			if (choice == IDYES)
+			if (choice == IDYES or Settings.ForceToCloseOnMatch)
 				closeComparePair(cmpPair);
 			else
 				clearComparePair(getCurrentBuffId());

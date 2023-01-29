@@ -36,6 +36,7 @@
 #define DEFAULT_WRAP_AROUND				0
 #define DEFAULT_GOTO_FIRST_DIFF			1
 #define DEFAULT_PROMPT_CLOSE_ON_MATCH	0
+#define DEFAULT_FORCE_CLOSE_ON_MATCH	0
 
 #define DEFAULT_STATUS_TYPE				0
 
@@ -139,6 +140,7 @@ public:
 	static const TCHAR wrapAroundSetting[];
 	static const TCHAR gotoFirstDiffSetting[];
 	static const TCHAR promptCloseOnMatchSetting[];
+	static const TCHAR forceCloseOnMatchSetting[];
 
 	static const TCHAR detectMovesSetting[];
 	static const TCHAR detectCharDiffsSetting[];
@@ -202,6 +204,7 @@ public:
 	bool			WrapAround;
 	bool			GotoFirstDiff;
 	bool			PromptToCloseOnMatch;
+	bool			ForceToCloseOnMatch;
 
 	bool			DetectMoves;
 	bool			DetectCharDiffs;

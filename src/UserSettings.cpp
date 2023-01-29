@@ -33,6 +33,7 @@ const TCHAR UserSettings::encodingsCheckSetting[]			= TEXT("check_encodings");
 const TCHAR UserSettings::alignAllMatchesSetting[]			= TEXT("align_all_matches");
 const TCHAR UserSettings::markIgnoredLinesSetting[]			= TEXT("never_colorize_ignored_lines");
 const TCHAR UserSettings::promptCloseOnMatchSetting[]		= TEXT("prompt_to_close_on_match");
+const TCHAR UserSettings::forceCloseOnMatchSetting[]		= TEXT("force_to_close_on_match");
 const TCHAR UserSettings::wrapAroundSetting[]				= TEXT("wrap_around");
 const TCHAR UserSettings::gotoFirstDiffSetting[]			= TEXT("go_to_first_on_recompare");
 const TCHAR UserSettings::followingCaretSetting[]			= TEXT("following_caret");
@@ -116,6 +117,8 @@ void UserSettings::load()
 			DEFAULT_GOTO_FIRST_DIFF, iniFile) != 0;
 	PromptToCloseOnMatch	= ::GetPrivateProfileInt(mainSection, promptCloseOnMatchSetting,
 			DEFAULT_PROMPT_CLOSE_ON_MATCH, iniFile) != 0;
+	ForceToCloseOnMatch = ::GetPrivateProfileInt(mainSection, forceCloseOnMatchSetting,
+			DEFAULT_FORCE_CLOSE_ON_MATCH, iniFile) != 0;
 
 	DetectMoves			= ::GetPrivateProfileInt(mainSection, detectMovesSetting,			1, iniFile) != 0;
 	DetectCharDiffs		= ::GetPrivateProfileInt(mainSection, detectCharDiffsSetting,		0, iniFile) != 0;
@@ -266,6 +269,8 @@ void UserSettings::save()
 			GotoFirstDiff ? TEXT("1") : TEXT("0"), iniFile);
 	::WritePrivateProfileString(mainSection, promptCloseOnMatchSetting,
 			PromptToCloseOnMatch ? TEXT("1") : TEXT("0"), iniFile);
+	::WritePrivateProfileString(mainSection, forceCloseOnMatchSetting,
+		ForceToCloseOnMatch ? TEXT("1") : TEXT("0"), iniFile);
 
 	::WritePrivateProfileString(mainSection, detectMovesSetting,
 			DetectMoves ? TEXT("1") : TEXT("0"), iniFile);
